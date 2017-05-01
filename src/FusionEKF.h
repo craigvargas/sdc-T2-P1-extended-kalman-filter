@@ -9,6 +9,10 @@
 #include "kalman_filter.h"
 #include "tools.h"
 
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
+
+
 class FusionEKF {
 public:
   /**
@@ -32,8 +36,15 @@ public:
   KalmanFilter ekf_;
 
 private:
+  //Calculate jacobian
+//  MatrixXd CalculateJacobian(const VectorXd& x_state);
+  MatrixXd CalculateJacobian();
+  
   // check whether the tracking toolbox was initiallized or not (first measurement)
   bool is_initialized_;
+  
+  // flag for jacobian divide by zero
+  bool jacobian_error_;
 
   // previous timestamp
   long long previous_timestamp_;

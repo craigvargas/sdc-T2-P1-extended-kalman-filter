@@ -133,6 +133,7 @@ int main(int argc, char* argv[]) {
 
   //Call the EKF-based fusion
   size_t N = measurement_pack_list.size();
+//  N=4;
   for (size_t k = 0; k < N; ++k) {
     // start filtering from the second frame (the speed is unknown in the first
     // frame)
@@ -162,6 +163,14 @@ int main(int argc, char* argv[]) {
     out_file_ << gt_pack_list[k].gt_values_(1) << "\t";
     out_file_ << gt_pack_list[k].gt_values_(2) << "\t";
     out_file_ << gt_pack_list[k].gt_values_(3) << "\n";
+    
+//    // output the squared error
+//    out_file_ << "===>" << "\t";
+//    out_file_ << pow(gt_pack_list[k].gt_values_(0)-fusionEKF.ekf_.x_(0),2) << "\t";
+//    out_file_ << pow(gt_pack_list[k].gt_values_(1)-fusionEKF.ekf_.x_(1),2) << "\t";
+//    out_file_ << pow(gt_pack_list[k].gt_values_(2)-fusionEKF.ekf_.x_(2),2) << "\t";
+//    out_file_ << pow(gt_pack_list[k].gt_values_(3)-fusionEKF.ekf_.x_(3),2) << "\n";
+
 
     estimations.push_back(fusionEKF.ekf_.x_);
     ground_truth.push_back(gt_pack_list[k].gt_values_);
